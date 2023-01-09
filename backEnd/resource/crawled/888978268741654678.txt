@@ -1,1 +1,0 @@
-{"url": "https://cmubackoffice.mis.cmu.ac.th", "title": "CMU Back Office", "text": "CMU Back Office           CMU BACK OFFICE  บริหารจัดการเว็บไซต์มหาวิทยาลัยเชียงใหม่  Login           Processing...", "url_lists": ["https://www.cmu.ac.th/login/login.aspx"]}

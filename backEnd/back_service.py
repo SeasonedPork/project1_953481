@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify, json
 from flask_cors import CORS, cross_origin
+from ElasticSearch_Oof import search
 
 app = Flask(__name__)
 Cors = CORS(app)
@@ -12,13 +13,19 @@ def submitData():
     response_object = {'status': 'success'}
     if request.method == "POST":
         post_data = request.get_json()
-        name = post_data.get('name'),
-        department = post_data.get('department')
-        print(name)
-        print(department)
+        name = post_data.get('emailReg'),
+        department = post_data.get('passwordReg')
+
         response_object['message'] = 'Data added!'
     return jsonify(response_object)
 
+@app.route("/search", methods=["POST","GET"])
+def search():
+    response_object = {'status': 'success'}
+    if request.method == "GET":
+
+
+    return
 
 if __name__ == '__main__':
     app.run(debug=True)
