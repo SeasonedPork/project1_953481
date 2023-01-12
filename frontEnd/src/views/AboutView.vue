@@ -100,6 +100,8 @@
 <script>
 import axios from "axios";
 export default {
+  // eslint-disable-next-line vue/multi-word-component-names
+  name: "about",
   data() {
     return {
       dataentry: {

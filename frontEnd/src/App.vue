@@ -1,23 +1,21 @@
 <template>
-  <div class="search-box">
-    <input
-      v-model="S_input"
-      placeholder="use this search bar for find your hope..."
-      name="search_input"
-    />
-    <button @click="doSearch">click to search!</button>
-  </div>
+  <!--  <div class="search-box">-->
+  <!--    <input-->
+  <!--      v-model="S_input"-->
+  <!--      placeholder="use this search bar for find your hope..."-->
+  <!--      name="search_input"-->
+  <!--    />-->
+  <!--    <button @click="doSearch">click to search!</button>-->
+  <!--  </div>-->
   <div id="app">
     <router-link :to="{ name: 'EventList' }">Home</router-link> |
     <router-link :to="{ name: 'about' }">About</router-link> |
-    <!--    <router-link :to="{ name: 'AddEvent' }"> New Event</router-link>-->
+    <router-link :to="{ name: 'search' }"> Search </router-link>
     <router-view />
   </div>
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
   name: "App",
   data() {
@@ -31,25 +29,25 @@ export default {
     EE() {
       alert("hello");
     },
-    doSearch() {
-      if (this.S_input === "") {
-        this.emptyFields = true;
-        alert("NO EMPTY NO NO!!");
-      } else {
-        const path = "http://127.0.0.1:5000/search";
-        axios
-          .post(path, {
-            S_input: this.S_input,
-          })
-          .then((response) => {
-            console.log("search is kinda work");
-            return response;
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
-    },
+    // doSearch() {
+    //   if (this.S_input === "") {
+    //     this.emptyFields = true;
+    //     alert("NO EMPTY NO NO!!");
+    //   } else {
+    //     const path = "http://127.0.0.1:5000/search";
+    //     axios
+    //       .post(path, {
+    //         S_input: this.S_input,
+    //       })
+    //       .then((response) => {
+    //         console.log("search is kinda work");
+    //         return response;
+    //       })
+    //       .catch((err) => {
+    //         console.log(err);
+    //       });
+    //   }
+    // },
   },
 };
 </script>
