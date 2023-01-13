@@ -23,6 +23,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import EventListView from "../views/EventListView.vue";
 import AboutView from "../views/AboutView.vue";
 import SearchView from "@/views/searchView.vue";
+import Eventcard from "@/components/EventCard.vue";
 // import EventDetails from '../views/EventDetailViews.vue'
 
 const routes = [
@@ -44,6 +45,11 @@ const routes = [
     path: "/search",
     name: "search",
     component: SearchView,
+  },
+  {
+    path: "/Eventcard",
+    name: "EventCard",
+    component: Eventcard,
   },
 ];
 

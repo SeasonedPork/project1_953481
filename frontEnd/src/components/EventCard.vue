@@ -1,19 +1,42 @@
 <template>
   <router-link
     class="event-link"
-    :to="{ name: 'EventDetails', params: { id: event.id } }"
+    :to="{ name: 'EventDetails', params: { id: EventCard.data } }"
   >
     <div class="event-card"></div>
   </router-link>
 </template>
 <script>
+import axios from "axios";
 export default {
   name: "EventCard",
+
   props: {
     event: {
       type: Object,
       required: true,
     },
+  },
+  data() {
+    return {
+      EventCard: [],
+    };
+  },
+  methods: {
+    get_data() {
+      const path = "https://localhost:5000/EventCard";
+      axios
+        .get(path)
+        .then((res) => {
+          this.EventCard = res.data.EventCard;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+  },
+  created() {
+    this.get_data();
   },
 };
 </script>

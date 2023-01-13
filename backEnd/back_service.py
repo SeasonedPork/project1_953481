@@ -1,7 +1,10 @@
 import requests
 from flask import Flask, request, jsonify, json,render_template
 from flask_cors import CORS, cross_origin
-from ElasticSearch_Oof import search
+from elasticsearch import Elasticsearch
+from jikanpy import Jikan
+jikan = Jikan()
+
 
 app = Flask(__name__)
 Cors = CORS(app)
@@ -9,6 +12,8 @@ CORS(app, resources={r'/*': {'origins': '*'}}, CORS_SUPPORTS_CREDENTIALS=True)
 app.config['CORS_HEADERS'] = 'Content-Type'
 anime_data = requests.get("https://api.jikan.moe/v4/anime", headers={'accept': 'application/json'})
 anime_json = anime_data.json()
+es = Elasticsearch
+# this part is about connect to each other
 @app.route("/dataentry", methods=["POST", "GET"])
 def submitData():
     response_object = {'status': 'success'}
@@ -33,19 +38,30 @@ def search():
         searchthing = post_data.get('S_input'),
         return searchthing
     return jsonify(response_object)
-@app.route("/get_Image",methods=["POST"])
+@app.route("/get_Image",methods=["GET"])
 def Image(id):
     response_object = {'Image_status': 'success'}
-    if request.method == "POST":
+    if request.method == "GET":
         pic_url = anime_json["images"]["jpg"]["image_url"][id]
-        return pic_url
+        return jsonify(pic_url)
     return  response_object
+
 @app.route("/get_All",methods=["GET"])
 def All():
+    response_object = {'ALL_status': 'success'}
+    if request.method == "GET":
         all_url = anime_json
         return jsonify(all_url)
+    return response_object
 
+@app.route("/EventCard",methods=["GET"])
+def Allah():
+    if request.method == "GET":
+        all_url = anime_json
 
+        return jsonify({'EventCard':all_url})
+
+#try to use jikanpy
 
 
 if __name__ == '__main__':

@@ -3,15 +3,16 @@
   <div class="events">
     <EventCard
       v-for="event in events"
-      :key="event.id"
+      :key="event.data"
       :event="event"
     ></EventCard>
+
     <div class="pagination">
       <router-link
         id="page-prev"
         :to="{ name: 'EventList', query: { page: page - 1 } }"
         rel="prev"
-        v-if="page != 1"
+        v-if="page != 0"
         >Prev Page</router-link
       >
       <router-link
@@ -37,13 +38,13 @@
       >
     </div>
   </div>
+  <div>{{ return_data }}</div>
 </template>
 
 <script>
 // @ is an alias to /src
 import EventCard from "../components/EventCard.vue";
-import EventService from "../services/EventService.js";
-import { watchEffect } from "@vue/runtime-core";
+import axios from "axios";
 
 export default {
   name: "EventListView",
@@ -67,17 +68,25 @@ export default {
       size: 2,
     };
   },
-  created() {
-    watchEffect(() => {
-      EventService.getEvents(this.perPage, this.page)
-        .then((response) => {
-          this.events = response.data;
-          this.totalEvents = response.headers["x-total-count"];
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    });
+  methods: {
+    doGet_All() {
+      if (this.S_input === "") {
+        this.emptyFields = true;
+        alert("NO EMPTY NO NO!!");
+      } else {
+        const path = "http://127.0.0.1:5000/get_All";
+        axios
+          .get(path)
+          .then((response) => {
+            this.return_data = response.data;
+            console.log("GetALL is kinda work");
+            return response;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    },
   },
   computed: {
     hasNextPage() {
