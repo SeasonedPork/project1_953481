@@ -11,7 +11,7 @@ Cors = CORS(app)
 CORS(app, resources={r'/*': {'origins': '*'}}, CORS_SUPPORTS_CREDENTIALS=True)
 app.config['CORS_HEADERS'] = 'Content-Type'
 anime_data = requests.get("https://api.jikan.moe/v4/anime", headers={'accept': 'application/json'})
-anime_top_data = requests.get("https://api.jikan.moe/v4/top/anime?limit=3", headers={'accept': 'application/json'})
+anime_top_data = requests.get("https://api.jikan.moe/v4/top/anime?limit=5", headers={'accept': 'application/json'})
 anime_json = anime_data.json()
 anime_top_json = anime_top_data.json()
 es = Elasticsearch

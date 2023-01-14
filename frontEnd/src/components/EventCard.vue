@@ -1,42 +1,23 @@
 <template>
   <router-link
     class="event-link"
-    :to="{ name: 'EventDetails', params: { id: EventCard.data } }"
+    :to="{ name: 'EventDetails', params: { rank: anime.rank } }"
   >
-    <div class="event-card"></div>
+    <div class="event-card">
+      <div>random text</div>
+      <h2>{{ anime.titles }}</h2>
+      <!--    <img :src="anime_data.images.jpg.image_url" alt="anime cover" />-->
+    </div>
   </router-link>
 </template>
 <script>
-import axios from "axios";
 export default {
   name: "EventCard",
-
   props: {
-    event: {
+    anime: {
       type: Object,
       required: true,
     },
-  },
-  data() {
-    return {
-      EventCard: [],
-    };
-  },
-  methods: {
-    get_data() {
-      const path = "https://localhost:5000/EventCard";
-      axios
-        .get(path)
-        .then((res) => {
-          this.EventCard = res.data.EventCard;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    },
-  },
-  created() {
-    this.get_data();
   },
 };
 </script>

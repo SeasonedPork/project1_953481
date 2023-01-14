@@ -2,13 +2,14 @@
   <h1>Events For Good</h1>
   <div>
     Top anime
-    <div
-      style="display: flex inline"
-      v-for="anime in top_anime.data"
-      :key="anime.rank"
-    >
-      <h2>{{ anime.title }}</h2>
-      <img :src="anime.images.jpg.image_url" alt="anime cover" />
+    <div>
+      <event-card
+        v-for="anime in Anime_data"
+        :key="anime.rank"
+        :anime="Anime_data"
+        style="display: inline grid; grid-template-columns: repeat(5, 1fr)"
+      >
+      </event-card>
     </div>
   </div>
   <div>Top manga</div>
@@ -19,6 +20,7 @@
 <script>
 // @ is an alias to /src
 import axios from "axios";
+import EventCard from "@/components/EventCard.vue";
 
 export default {
   name: "EventListView",
@@ -32,10 +34,10 @@ export default {
       required: true,
     },
   },
-  components: {},
+  components: { EventCard },
   data() {
     return {
-      top_anime: [],
+      Anime_data: null,
       title: "",
     };
   },
@@ -46,7 +48,7 @@ export default {
         .get(path)
         .then((res) => {
           console.log("top work");
-          this.top_anime = res.data;
+          this.Anime_data = res.data;
         })
         .catch((error) => {
           console.error(error);

@@ -1,14 +1,20 @@
 <template>
-  <div></div>
+  <div>
+    <div v-if="anime">
+      <h2>{{ anime.title }}</h2>
+      <img :src="anime.images.jpg.image_url" alt="anime cover" />
+    </div>
+  </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
+  props: ["rank"],
   data() {
     return {
-      search: {
-        S_input: "",
-      },
+      anime: null,
     };
   },
   methods: {
@@ -42,5 +48,6 @@ export default {
           });
       }
     },
+  },
 };
 </script>
