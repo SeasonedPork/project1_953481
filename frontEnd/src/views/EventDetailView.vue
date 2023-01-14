@@ -1,30 +1,46 @@
 <template>
-  <div v-if="event">
-    <h1>{{ event.title }}</h1>
-    <p>{{ event.time }} on {{ event.date }} @ {{ event.location }}</p>
-    <p>{{ event.description }}</p>
-  </div>
+  <div></div>
 </template>
 
 <script>
-import EventService from "@/services/EventService.js";
-
 export default {
-  props: ["id"],
   data() {
     return {
-      event: null,
+      search: {
+        S_input: "",
+      },
     };
   },
-  created() {
-    // fetch event (by id) and set local event data
-    EventService.getEvent(this.id)
-      .then((response) => {
-        this.event = response.data;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  },
+  methods: {
+    get_top() {
+      const path = "http://127.0.0.1:5000/topAnime";
+      axios
+        .get(path)
+        .then((res) => {
+          console.log("top work");
+          this.top_anime = res.data;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    doGet_All() {
+      if (this.S_input === "") {
+        this.emptyFields = true;
+        alert("NO EMPTY NO NO!!");
+      } else {
+        const path = "http://127.0.0.1:5000/get_All";
+        axios
+          .get(path)
+          .then((response) => {
+            this.return_data = response.data;
+            console.log("GetALL is kinda work");
+            return response;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    },
 };
 </script>

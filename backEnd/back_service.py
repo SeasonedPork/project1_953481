@@ -11,7 +11,9 @@ Cors = CORS(app)
 CORS(app, resources={r'/*': {'origins': '*'}}, CORS_SUPPORTS_CREDENTIALS=True)
 app.config['CORS_HEADERS'] = 'Content-Type'
 anime_data = requests.get("https://api.jikan.moe/v4/anime", headers={'accept': 'application/json'})
+anime_top_data = requests.get("https://api.jikan.moe/v4/top/anime?limit=3", headers={'accept': 'application/json'})
 anime_json = anime_data.json()
+anime_top_json = anime_top_data.json()
 es = Elasticsearch
 # this part is about connect to each other
 @app.route("/dataentry", methods=["POST", "GET"])
@@ -51,16 +53,16 @@ def All():
     response_object = {'ALL_status': 'success'}
     if request.method == "GET":
         all_url = anime_json
-        return jsonify(all_url)
+        return all_url
     return response_object
 
-@app.route("/EventCard",methods=["GET"])
-def Allah():
+@app.route("/topAnime",methods=["GET"])
+def top():
+    response_object = {'TOP_status': 'success'}
     if request.method == "GET":
-        all_url = anime_json
-
-        return jsonify({'EventCard':all_url})
-
+        data_top = anime_top_json
+        return data_top
+    return response_object
 #try to use jikanpy
 
 

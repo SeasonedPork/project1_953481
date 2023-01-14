@@ -1,49 +1,23 @@
 <template>
   <h1>Events For Good</h1>
-  <div class="events">
-    <EventCard
-      v-for="event in events"
-      :key="event.data"
-      :event="event"
-    ></EventCard>
-
-    <div class="pagination">
-      <router-link
-        id="page-prev"
-        :to="{ name: 'EventList', query: { page: page - 1 } }"
-        rel="prev"
-        v-if="page != 0"
-        >Prev Page</router-link
-      >
-      <router-link
-        id="page-next"
-        :to="{ name: 'EventList', query: { page: page + 1 } }"
-        rel="next"
-        v-if="prevPage"
-        >Next Page</router-link
-      >
-      <router-link
-        id="page-size-minus"
-        :to="{ name: 'EventList', query: { size: size - 1 } }"
-        rel="next"
-        v-if="addPage"
-        >Decrese SIZE</router-link
-      >
-      <router-link
-        id="page-size-plus"
-        :to="{ name: 'EventList', query: { size: size + 1 } }"
-        rel="next"
-        v-if="check"
-        >Increase SIZE</router-link
-      >
+  <div>
+    Top anime
+    <div
+      style="display: flex inline"
+      v-for="anime in top_anime.data"
+      :key="anime.rank"
+    >
+      <h2>{{ anime.title }}</h2>
+      <img :src="anime.images.jpg.image_url" alt="anime cover" />
     </div>
   </div>
-  <div>{{ return_data }}</div>
+  <div>Top manga</div>
+  <div>Your favourite</div>
+  <div>Recommendation</div>
 </template>
 
 <script>
 // @ is an alias to /src
-import EventCard from "../components/EventCard.vue";
 import axios from "axios";
 
 export default {
@@ -58,17 +32,26 @@ export default {
       required: true,
     },
   },
-  components: {
-    EventCard,
-  },
+  components: {},
   data() {
     return {
-      events: null,
-      totalEvents: 0, // add thiis for store totalevent
-      size: 2,
+      top_anime: [],
+      title: "",
     };
   },
   methods: {
+    get_top() {
+      const path = "http://127.0.0.1:5000/topAnime";
+      axios
+        .get(path)
+        .then((res) => {
+          console.log("top work");
+          this.top_anime = res.data;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
     doGet_All() {
       if (this.S_input === "") {
         this.emptyFields = true;
@@ -111,6 +94,9 @@ export default {
       // Then check to see if the current page is less than the total pages.
       return this.perPage >= 2;
     },
+  },
+  created() {
+    this.get_top();
   },
 };
 </script>

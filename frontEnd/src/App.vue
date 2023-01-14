@@ -11,7 +11,6 @@
     <router-link :to="{ name: 'EventList' }">Home</router-link> |
     <router-link :to="{ name: 'about' }">About</router-link> |
     <router-link :to="{ name: 'search' }"> Search </router-link>|
-    <router-link to="{ name: 'eventcard' }"> Eventcard</router-link>|
     <router-view />
   </div>
 </template>
