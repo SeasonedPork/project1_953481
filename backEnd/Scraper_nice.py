@@ -80,7 +80,7 @@ class MultiThreadCrawler:
 
     def parse_contents(self, url, html, url_lists):
         def tag_visible(element):
-            if element.parent.name in ['title', 'score', 'scored_by', 'rank', 'background']:
+            if element.parent.name in ['style', 'script', 'head', 'title', 'meta', '[document]']:
                 return False
             if isinstance(element, Comment):
                 return False
@@ -101,5 +101,5 @@ class MultiThreadCrawler:
 
 
 if __name__ == '__main__':
-    s = MultiThreadCrawler("https://api.jikan.moe/v4/anime", 1)
+    s = MultiThreadCrawler("https://www.cmu.ac.th/", 1)
     s.run_scraper()

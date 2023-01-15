@@ -3,6 +3,12 @@ from flask import Flask, request, jsonify, json,render_template
 from flask_cors import CORS, cross_origin
 from elasticsearch import Elasticsearch
 from jikanpy import Jikan
+from nltk import PorterStemmer, word_tokenize
+from nltk.corpus import stopwords
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+
+from backEnd import main
+
 jikan = Jikan()
 
 
@@ -64,6 +70,28 @@ def find(name):
         data_top = anime_top_json
         return data_top
     return response_object
+
+def preProcess(s):
+    ps = PorterStemmer()
+    s = word_tokenize(s)
+    stopwords_set = set(stopwords.words())
+    s = [w for w in s if w not in stopwords_set]
+    # s = [w for w in s if not w.isdigit()]
+    s = [ps.stem(w) for w in s]
+    s = ' '.join(s)
+    return s
+
+
+def sk_vectorize():
+    print("bag of words processing...")
+    cleaned_description = main.get_and_clean_data()
+    vectorizer = CountVectorizer(preprocessor=preProcess)
+    vectorizer.fit(cleaned_description)
+    vectorizer = CountVectorizer(preprocessor=preProcess, ngram_range=(1, 2))
+    X = vectorizer.fit_transform(cleaned_description)
+
+
+
 
 
 if __name__ == '__main__':

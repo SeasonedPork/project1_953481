@@ -1,6 +1,9 @@
-import numpy as np
+import json
+import os
+import pickle
+from pathlib import Path
 
-from solar import *
+import numpy as np
 
 from elasticsearch import Elasticsearch
 
