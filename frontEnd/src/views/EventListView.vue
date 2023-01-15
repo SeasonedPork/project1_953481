@@ -4,10 +4,10 @@
     Top anime
     <div>
       <event-card
-        v-for="anime in Anime_data"
+        v-for="anime in Anime_data.data"
         :key="anime.rank"
-        :anime="Anime_data"
-        style="display: inline grid; grid-template-columns: repeat(5, 1fr)"
+        :anime="anime"
+        style="display: inline grid"
       >
       </event-card>
     </div>
@@ -37,7 +37,7 @@ export default {
   components: { EventCard },
   data() {
     return {
-      Anime_data: null,
+      Anime_data: [],
       title: "",
     };
   },
