@@ -1,9 +1,11 @@
 <template>
-  <div class="event-card">
-    <div>random text</div>
-    <h2>{{ anime.title }}</h2>
-    <img :src="anime.images.jpg.image_url" alt="anime cover" />
-  </div>
+  <router-link to="EventDetailView, params: {id: anime.rank}">
+    <div class="event-card">
+      <div>random text</div>
+      <h2>{{ anime.title }}</h2>
+      <img :src="anime.images.jpg.image_url" alt="anime cover" />
+    </div>
+  </router-link>
 </template>
 <script>
 export default {
