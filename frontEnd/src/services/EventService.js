@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: process.env.VUE_APP_BACKEND_URL,
+  baseURL: "https://api.jikan.moe/v4/anime",
   withCredentials: false,
   headers: {
     Accept: "application/json",
@@ -10,8 +10,7 @@ const apiClient = axios.create({
 });
 
 export default {
-  //Added new call
   getEvent(id) {
-    return apiClient.get("/events" + id);
+    return apiClient.get("/" + id + "/full");
   },
 };

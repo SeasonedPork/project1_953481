@@ -1,21 +1,17 @@
 <template>
-  <h1>Events For Good</h1>
-  <div>{{ count }}</div>
   <div>
-    Top anime
+    All anime
     <div>
       <event-card
         v-for="anime in Anime_data.data"
-        :key="anime.mal_id"
+        :key="anime.rank"
         :anime="anime"
-        style="display: inline grid; grid-template-columns: repeat(5, 1fr)"
+        style="display: inline grid"
       >
       </event-card>
     </div>
   </div>
-  <div>Top manga</div>
-  <div>Your favourite</div>
-  <div>Recommendation</div>
+  <div>All manga</div>
 </template>
 
 <script>
@@ -39,24 +35,10 @@ export default {
   data() {
     return {
       Anime_data: [],
-      Anime_top_data: [],
       title: "",
-      count: 0,
     };
   },
   methods: {
-    get_top() {
-      const path = "http://127.0.0.1:5000/topAnime";
-      axios
-        .get(path)
-        .then((res) => {
-          console.log("top work");
-          this.Anime_data = res.data;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    },
     doGet_All() {
       if (this.S_input === "") {
         this.emptyFields = true;
@@ -67,7 +49,6 @@ export default {
           .get(path)
           .then((response) => {
             this.Anime_data = response.data;
-            this.count = Object.keys(response.data).length;
             console.log("GetALL is kinda work");
             return response;
           })
@@ -77,27 +58,29 @@ export default {
       }
     },
   },
-  hasNextPage() {
-    //first calculate total pages
-    let totalPages = Math.ceil(this.totalEvents / 2); // 2 is events per pages
+  computed: {
+    hasNextPage() {
+      //first calculate total pages
+      let totalPages = Math.ceil(this.totalEvents / 2); // 2 is events per pages
 
-    //then check to see if the current page is less than a total pages
-    return this.page < totalPages;
-  },
-  prevPage() {
-    // First, calcalate total pages
+      //then check to see if the current page is less than a total pages
+      return this.page < totalPages;
+    },
+    prevPage() {
+      // First, calcalate total pages
 
-    // Then check to see if the current page is less than the total pages.
-    return this.page >= 2;
-  },
-  addPage() {
-    return this.perPage < this.totalEvents;
-  },
-  Check() {
-    // First, calcalate total pages
+      // Then check to see if the current page is less than the total pages.
+      return this.page >= 2;
+    },
+    addPage() {
+      return this.perPage < this.totalEvents;
+    },
+    Check() {
+      // First, calcalate total pages
 
-    // Then check to see if the current page is less than the total pages.
-    return this.perPage >= 2;
+      // Then check to see if the current page is less than the total pages.
+      return this.perPage >= 2;
+    },
   },
   created() {
     this.doGet_All();

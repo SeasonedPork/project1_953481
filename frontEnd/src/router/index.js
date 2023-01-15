@@ -1,31 +1,9 @@
-// import Vue from "vue";
-// import VueRouter from "vue-router";
-// import Frontview from "../views/AboutView.vue";
-// import HelloWorld from "@/components/HelloWorld.vue";
-// Vue.use(VueRouter);
-// export default new VueRouter({
-//   mode: "history",
-//   routes: [
-//     {
-//       path: "/",
-//       name: "Frontview",
-//       component: Frontview,
-//     },
-//     {
-//       path: "/dummy",
-//       name: "HelloWorld",
-//       component: HelloWorld,
-//     },
-//   ],
-// });
-
 import { createRouter, createWebHistory } from "vue-router";
 import EventListView from "../views/EventListView.vue";
 import AboutView from "../views/AboutView.vue";
 import SearchView from "@/views/searchView.vue";
-// import Eventcard from "@/components/EventCard.vue";
 import EventDetailView from "@/views/EventDetailView.vue";
-// import EventDetails from '../views/EventDetailViews.vue'
+import EventLayoutView from "@/views/EventLayout.vue";
 
 const routes = [
   {
@@ -48,10 +26,24 @@ const routes = [
     component: SearchView,
   },
   {
-    path: "/EventDetailView",
+    path: "/EventDetailView/:mal_id",
     name: "EventDetailView",
+    props: true,
     component: EventDetailView,
+    children: [
+      {
+        path: "",
+        name: "EventLayoutView",
+        component: EventLayoutView,
+        props: true,
+      },
+    ],
   },
+  // {
+  //   path: "/EventDetailView",
+  //   name: "EventDetailView",
+  //   component: EventDetailView,
+  // },
 ];
 
 const router = createRouter({

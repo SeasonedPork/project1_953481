@@ -3,9 +3,13 @@ import json
 import requests
 import pandas as pd
 
-response = requests.get('https://api.jikan.moe/v4/anime')
+response = requests.get('https://api.jikan.moe/v4/anime?q=')
 response_json = response.json()
 
-df = pd.json_normalize(response_json)
-df.to_csv('../backEnd/resource/anime_data.csv')
-print("done")
+
+data_fix = json.dumps(response_json, indent=2,sort_keys=True)
+print(type(data_fix))
+print(type(response_json))
+data_Json = json.loads(data_fix)
+print(type(data_Json))
+

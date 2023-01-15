@@ -1,12 +1,4 @@
 <template>
-  <!--  <div class="search-box">-->
-  <!--    <input-->
-  <!--      v-model="S_input"-->
-  <!--      placeholder="use this search bar for find your hope..."-->
-  <!--      name="search_input"-->
-  <!--    />-->
-  <!--    <button @click="doSearch">click to search!</button>-->
-  <!--  </div>-->
   <div id="app">
     <router-link :to="{ name: 'EventList' }">Home</router-link> |
     <router-link :to="{ name: 'about' }">About</router-link> |
@@ -53,6 +45,14 @@ export default {
 </script>
 
 <style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+
 nav {
   padding: 30px;
 }

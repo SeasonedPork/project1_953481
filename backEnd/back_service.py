@@ -40,13 +40,6 @@ def search():
         searchthing = post_data.get('S_input'),
         return searchthing
     return jsonify(response_object)
-@app.route("/get_Image",methods=["GET"])
-def Image(id):
-    response_object = {'Image_status': 'success'}
-    if request.method == "GET":
-        pic_url = anime_json["images"]["jpg"]["image_url"][id]
-        return jsonify(pic_url)
-    return  response_object
 
 @app.route("/get_All",methods=["GET"])
 def All():
@@ -64,6 +57,13 @@ def top():
         return data_top
     return response_object
 #try to use jikanpy
+@app.route("/EventDetailView:",methods=["GET"])
+def find(name):
+    response_object = {'TOP_status': 'success'}
+    if request.method == "GET":
+        data_top = anime_top_json
+        return data_top
+    return response_object
 
 
 if __name__ == '__main__':

@@ -1,11 +1,13 @@
 <template>
-  <router-link to="EventDetailView, params: {id: anime.rank}">
-    <div class="event-card">
-      <div>random text</div>
+  <div class="event-card">
+    <router-link
+      :to="{ name: 'EventDetailView', params: { mal_id: anime.mal_id } }"
+    >
       <h2>{{ anime.title }}</h2>
+      <div>{{ anime.mal_id }}</div>
       <img :src="anime.images.jpg.image_url" alt="anime cover" />
-    </div>
-  </router-link>
+    </router-link>
+  </div>
 </template>
 <script>
 export default {
