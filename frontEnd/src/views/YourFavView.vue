@@ -1,40 +1,99 @@
 <template>
-  <div>Your favourite Anime</div>
+  <div class="g">Your Favorite Anime</div>
+  <button @click="DeleteFavAnime">
+    click here to removed it from Favourite
+  </button>
   <div class="scrollmenu">
-    <a></a>
+    <a>
+      <event-card
+        v-for="anime in get_data"
+        :key="anime.data.mal_id"
+        :anime="anime.data"
+      >
+      </event-card>
+    </a>
+    <div style="text-underline-color: #39b982">{{ Anime_data }}</div>
   </div>
-  <div>Your favourite Manga</div>
 </template>
+
 <script>
-// import EventService from "@/services/EventService";
+import EventCard from "@/components/EventCard.vue";
+import axios from "axios";
+import EventService from "@/services/EventService";
 
 export default {
-  name: "YourFavView",
+  name: "yourFav",
+  props: {
+    page: {
+      type: Number,
+      required: true,
+    },
+    perPage: {
+      type: Number,
+      required: true,
+    },
+  },
+  components: { EventCard },
   data() {
     return {
-      Anime_data: [],
-      Anime_top_data: [],
-      manga_data: [],
-      manga_top_data: [],
-      input: [],
+      Anime_data: [8],
+      get_data: [],
+      title: "",
       count: 0,
     };
   },
+  methods: {
+    DeleteFavAnime() {
+      const path = "http://127.0.0.1:5000/Delete_fav_anime";
+      axios
+        .get(path, { params: { mal_id: this.mal_id } })
+        .then((res) => {
+          console.log(res);
+          console.log("search fav anime result work");
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    getBookmarkAnime() {
+      const path = "http://127.0.0.1:5000/get_bookmark_anime";
+      axios
+        .get(path)
+        .then((res) => {
+          console.log(res);
+          console.log("search fav anime result work");
+          this.Anime_data = res.data;
+          for (let i = 0; i < this.Anime_data.length; i++) {
+            console.log("this shit work");
+            EventService.getEvent(this.Anime_data[i])
+              .then((response) => {
+                this.get_data.push(response.data);
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+  },
   created() {
-    // EventService.getEvent(this.mal_id)
-    //   .then((response) => {
-    //     this.anime = response.data;
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+    this.getBookmarkAnime();
   },
 };
 </script>
-<style>
-.img:hover {
-  transform: scale(1.1);
-  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.2);
+<style scoped>
+.events {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.pagination {
+  display: flex;
+  width: 290px;
+  height: 100px;
 }
 .pagination a {
   flex: 1;
@@ -56,5 +115,10 @@ div.scrollmenu a {
 }
 div.scrollmenu a:hover {
   background-color: #777;
+}
+.g {
+  font-size: 24px;
+  font-family: "Book Antiqua", serif;
+  font-weight: bolder;
 }
 </style>

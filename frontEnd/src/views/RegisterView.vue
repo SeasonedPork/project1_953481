@@ -186,48 +186,39 @@ p {
   padding: 20px;
 }
 
-.form-group {
-  input {
-    margin-bottom: 20px;
-  }
-}
-
 .login-page {
   align-items: center;
   display: flex;
   height: 100vh;
+}
 
-  .wallpaper-login {
-    background: url(https://images.pexels.com/photos/32237/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)
-      no-repeat center center;
-    background-size: cover;
-    height: 100%;
-    position: absolute;
-    width: 100%;
-  }
+.wallpaper-login {
+  no-repeat: center center;
+  background-size: cover;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
 
-  .fade-enter-active,
-  .fade-leave-active {
-    transition: opacity 0.5s;
-  }
-  .fade-enter,
-  .fade-leave-to {
-    opacity: 0;
-  }
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
 
-  .wallpaper-register {
-    background: url(https://images.pexels.com/photos/533671/pexels-photo-533671.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)
-      no-repeat center center;
-    background-size: cover;
-    height: 100%;
-    position: absolute;
-    width: 100%;
-    z-index: -1;
-  }
+.wallpaper-register {
+  background-size: cover;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+}
 
-  h1 {
-    margin-bottom: 1.5rem;
-  }
+h1 {
+  margin-bottom: 1.5rem;
 }
 
 .error {

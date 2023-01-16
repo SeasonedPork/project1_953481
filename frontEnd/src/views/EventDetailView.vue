@@ -1,9 +1,10 @@
 <template>
   <div>
-    <button @click="yoink_id">click here for book mark this!</button>
+    <button @click="yoink_id">click here for Book mark this!</button>
     <div v-if="anime">
       <router-view :anime="anime"></router-view>
     </div>
+    <button @click="yoink_fav_id">OR click here for Favorite this!</button>
   </div>
 </template>
 
@@ -20,7 +21,20 @@ export default {
   },
   methods: {
     yoink_id() {
-      const path = "http://127.0.0.1:5000/yoink_manga_id";
+      const path = "http://127.0.0.1:5000/yoink_B_id";
+      axios
+        .get(path, { params: { mal_id: this.mal_id } })
+        .then((res) => {
+          console.log(res);
+          console.log("search result work");
+          console.log(this.mal_id);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    yoink_fav_id() {
+      const path = "http://127.0.0.1:5000/yoink_fav";
       axios
         .get(path, { params: { mal_id: this.mal_id } })
         .then((res) => {

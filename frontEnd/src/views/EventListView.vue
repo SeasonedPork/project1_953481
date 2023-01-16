@@ -1,5 +1,13 @@
 <template>
-  <div>Top Anime</div>
+  <div
+    style="
+      font-size: 24px;
+      font-family: 'Book Antiqua', serif;
+      font-weight: bolder;
+    "
+  >
+    Top Anime
+  </div>
   <div class="scrollmenu">
     <a>
       <event-card
@@ -10,7 +18,15 @@
       </event-card>
     </a>
   </div>
-  <div>Top manga</div>
+  <div
+    style="
+      font-size: 24px;
+      font-family: 'Book Antiqua', serif;
+      font-weight: bolder;
+    "
+  >
+    Top manga
+  </div>
   <div class="scrollmenu">
     <a>
       <event-card-manga
@@ -21,8 +37,24 @@
       </event-card-manga>
     </a>
   </div>
-  <div>Your favourite</div>
-  <div>Recommendation</div>
+  <div
+    style="
+      font-size: 24px;
+      font-family: 'Book Antiqua', serif;
+      font-weight: bolder;
+    "
+  >
+    Your favourite
+  </div>
+  <div
+    style="
+      font-size: 24px;
+      font-family: 'Book Antiqua', serif;
+      font-weight: bolder;
+    "
+  >
+    Recommendation?
+  </div>
 </template>
 
 <script>
@@ -55,30 +87,6 @@ export default {
     };
   },
   methods: {
-    get_top() {
-      const path = "http://127.0.0.1:5000/topAnime";
-      axios
-        .get(path)
-        .then((res) => {
-          console.log("top work");
-          this.Anime_data = res.data;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    },
-    get_top_M() {
-      const path = "http://127.0.0.1:5000/topManga";
-      axios
-        .get(path)
-        .then((res) => {
-          console.log("top work");
-          this.manga_top_data = res.data;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    },
     doGet_All_M() {
       if (this.S_input === "") {
         this.emptyFields = true;
@@ -141,6 +149,7 @@ export default {
 div.scrollmenu {
   background-color: #333;
   overflow: auto;
+  overflow-y: scroll;
   white-space: nowrap;
 }
 

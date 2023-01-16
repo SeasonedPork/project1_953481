@@ -12,9 +12,9 @@
   <input
     v-model="S_input_manga"
     placeholder="use this search bar for finding Manga"
-    @keyup.enter="get_Search"
+    @keyup.enter="get_Search_manga"
   />
-  <button @click="get_Search">click to search! for MANGA!</button>
+  <button @click="get_Search_manga">click to search! for MANGA!</button>
   <div>result : {{ return_data }}</div>
 </template>
 
@@ -27,6 +27,7 @@ export default {
   data() {
     return {
       S_input: "",
+      S_input_manga: "",
       empty: false,
       return_data: "",
     };
@@ -39,6 +40,23 @@ export default {
         const path = "http://127.0.0.1:5000/search";
         axios
           .get(path, { params: { S_input: this.S_input } })
+          .then((res) => {
+            console.log("search result work");
+            console.log(res.data);
+            this.return_data = res.data;
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+    },
+    get_Search_manga() {
+      if (this.S_input_manga === "") {
+        alert("please add some input");
+      } else {
+        const path = "http://127.0.0.1:5000/searchManga";
+        axios
+          .get(path, { params: { S_input_manga: this.S_input_manga } })
           .then((res) => {
             console.log("search result work");
             console.log(res.data);

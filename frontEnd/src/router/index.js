@@ -33,11 +33,19 @@ const routes = [
     path: "/bookmark",
     name: "bookMarkView",
     component: Bookmark,
+    props: (route) => ({
+      page: parseInt(route.query.page) || 1,
+      perPage: parseInt(route.query.perPage) || 1,
+    }),
   },
   {
     path: "/yourFav",
     name: "yourFavView",
     component: yourFavView,
+    props: (route) => ({
+      page: parseInt(route.query.page) || 1,
+      perPage: parseInt(route.query.perPage) || 1,
+    }),
   },
   {
     path: "/EventDetailView/:mal_id",

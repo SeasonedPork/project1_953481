@@ -1,33 +1,16 @@
 <template>
   <div>Your Favorite Anime</div>
-  <div class="scrollmenu">
-    <a>
-      <event-card
-        v-for="anime in Anime_data.data"
-        :key="anime.mal_id"
-        :anime="anime"
-      >
-      </event-card>
-    </a>
-  </div>
-  <div>Your Favorite manga</div>
-  <div class="scrollmenu">
-    <a>
-      <event-card-manga
-        v-for="manga in manga_data.data"
-        :key="manga.mal_id"
-        :manga="manga"
-      >
-      </event-card-manga>
-    </a>
-  </div>
-  <div>Your favourite</div>
+  <router-link
+    :to="{ name: 'EventDetailView', params: { mal_id: anime.mal_id } }"
+  >
+    <img class="img" :src="anime.images.jpg.image_url" alt="anime cover" />
+    <h2 style="font-size: 12px">{{ anime.title }}</h2>
+  </router-link>
   <div>Recommendation</div>
 </template>
 
 <script>
-import EventCard from "@/components/EventCard.vue";
-import EventCardManga from "@/components/EventCardManga.vue";
+import axios from "axios";
 
 export default {
   name: "EventListView",
@@ -41,7 +24,6 @@ export default {
       required: true,
     },
   },
-  components: { EventCardManga, EventCard },
   data() {
     return {
       Anime_data: [],
@@ -50,8 +32,38 @@ export default {
       count: 0,
     };
   },
-  methods: {},
-  created() {},
+  methods: {
+    getFavAnime() {
+      const path = "http://127.0.0.1:5000/get_fav_anime";
+      axios
+        .get(path)
+        .then((res) => {
+          console.log(res);
+          console.log("search fav anime result work");
+          this.manga_data = res;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    getFavManga() {
+      const path = "http://127.0.0.1:5000/get_fav_manga";
+      axios
+        .get(path)
+        .then((res) => {
+          console.log(res);
+          console.log("search fav manga result work");
+          this.Anime_data = res;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+  },
+  created() {
+    this.getFavManga();
+    this.getFavAnime();
+  },
 };
 </script>
 <style scoped>

@@ -1,38 +1,67 @@
 <template>
-  <div>Bookmark from Anime that you selected :)</div>
-  <div class="scrollmenu">
-    <a></a>
-  </div>
-  <div>Bookmark from Manga that you selected and maybe..forget :)</div>
+  <div>Your BookmarkAnime</div>
+  <router-link
+    :to="{ name: 'EventDetailView', params: { mal_id: anime.mal_id } }"
+  >
+    <img class="img" :src="anime.images.jpg.image_url" alt="anime cover" />
+    <h2 style="font-size: 12px">{{ anime.title }}</h2>
+  </router-link>
+  <div>Recommendation</div>
 </template>
 <script>
 // import EventService from "@/services/EventService";
 
+import axios from "axios";
+
 export default {
-  name: "bookMarkView",
+  name: "EventListView",
+  props: {
+    page: {
+      type: Number,
+      required: true,
+    },
+    perPage: {
+      type: Number,
+      required: true,
+    },
+  },
   data() {
     return {
-      Anime_array_data: [],
-      manga_array_data: [],
-      input: [],
+      Anime_data: [],
+      manga_data: [],
+      title: "",
       count: 0,
     };
   },
+  methods: {
+    getBookmarkAnime() {
+      const path = "http://127.0.0.1:5000/get_B_anime";
+      axios
+        .get(path)
+        .then((res) => {
+          console.log(res);
+          console.log("search fav anime result work");
+          this.manga_data = res;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    getFavManga() {
+      const path = "http://127.0.0.1:5000/get_fav_manga";
+      axios
+        .get(path)
+        .then((res) => {
+          console.log(res);
+          console.log("search fav manga result work");
+          this.Anime_data = res;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+  },
   created() {
-    // EventService.getEvent(this.mal_id)
-    //   .then((response) => {
-    //     this.anime = response.data;
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-    // EventService.getEvent_manga(this.mal_id)
-    //   .then((response) => {
-    //     this.anime = response.data;
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
   },
 };
 </script>
