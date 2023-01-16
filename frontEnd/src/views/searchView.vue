@@ -1,12 +1,20 @@
 <template>
+  <div>Anime searcher</div>
   <div class="search-box">
     <input
       v-model="S_input"
-      placeholder="use this search bar for find your hope..."
+      placeholder="use this search bar for finding Anime"
       @keyup.enter="get_Search"
     />
-    <button @click="get_Search">click to search!</button>
+    <button @click="get_Search">click to search! for ANIME!</button>
   </div>
+  <div>Manga searcher</div>
+  <input
+    v-model="S_input_manga"
+    placeholder="use this search bar for finding Manga"
+    @keyup.enter="get_Search"
+  />
+  <button @click="get_Search">click to search! for MANGA!</button>
   <div>result : {{ return_data }}</div>
 </template>
 
@@ -38,23 +46,6 @@ export default {
           })
           .catch((error) => {
             console.error(error);
-          });
-      }
-    },
-    doSearch() {
-      if (this.S_input === "") {
-        this.emptyFields = true;
-        alert("NO EMPTY NO NO!!");
-      } else {
-        const path = "http://127.0.0.1:5000/search";
-        axios
-          .post(path, { params: { S_input: this.S_input } })
-          .then((response) => {
-            console.log("search result work");
-            this.return_data = response.data;
-          })
-          .catch((err) => {
-            console.log(err);
           });
       }
     },

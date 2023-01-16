@@ -4,8 +4,8 @@ import pickle
 from pathlib import Path
 from elasticsearch import Elasticsearch
 
-from indexer_6 import Indexer
-from pageRank_6 import Pr
+from Indexer_Oof import Indexer
+from PageRank import Pr
 
 
 class Indexer:

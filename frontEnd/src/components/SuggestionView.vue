@@ -1,19 +1,16 @@
 <template>
   <router-link
-    :to="{
-      name: 'EventDetailViewManga',
-      params: { mal_id: manga.mal_id },
-    }"
+    :to="{ name: 'EventDetailView', params: { mal_id: anime.mal_id } }"
   >
-    <img class="img" :src="manga.images.jpg.image_url" alt="anime cover" />
-    <h2 style="font-size: 12px">{{ manga.title }}</h2>
+    <img class="img" :src="anime.images.jpg.image_url" alt="anime cover" />
+    <h2 style="font-size: 12px">{{ anime.title }}</h2>
   </router-link>
 </template>
 <script>
 export default {
-  name: "EventCardManga",
+  name: "EventCard",
   props: {
-    manga: {
+    anime: {
       type: Object,
       required: true,
     },

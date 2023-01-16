@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     yoink_id() {
-      const path = "http://127.0.0.1:5000/yoink_id";
+      const path = "http://127.0.0.1:5000/yoink_manga_id";
       axios
         .get(path, { params: { mal_id: this.mal_id } })
         .then((res) => {

@@ -1,8 +1,10 @@
 <template>
   <div id="app">
     <router-link :to="{ name: 'EventList' }">Home</router-link> |
-    <router-link :to="{ name: 'about' }">About</router-link> |
-    <router-link :to="{ name: 'search' }"> Search </router-link>
+    <router-link :to="{ name: 'RegisterView' }">Register/Login</router-link>|
+    <router-link :to="{ name: 'search' }"> Search </router-link> |
+    <router-link :to="{ name: 'bookMarkView' }"> Bookmark </router-link> |
+    <router-link :to="{ name: 'yourFavView' }"> Favorite </router-link>
     <router-view />
   </div>
 </template>
@@ -45,7 +47,11 @@ export default {
 </script>
 
 <style>
+router-link {
+  background: black;
+}
 #app {
+  background: cornflowerblue;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

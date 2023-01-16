@@ -1,6 +1,5 @@
 <template>
   <div>
-    <div>text</div>
     <button @click="yoink_id">click here for book mark this!</button>
     <div v-if="manga">
       <router-view :manga="manga"></router-view>

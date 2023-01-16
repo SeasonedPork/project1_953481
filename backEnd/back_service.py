@@ -29,6 +29,8 @@ bookmark_mal_id = [1, 2, 3]
 favourite_mal_id = [1, 2, 3]
 bookmark_manga_mal_id = [4, 5, 6]
 favourite_manga_mal_id = [4, 5, 6]
+search_title = []
+search_synopsis = []
 
 
 # this part is about connect to each other
@@ -144,25 +146,19 @@ def yoink_manga():
             bookmark_manga_mal_id.append(convert_int)
     return bookmark_manga_mal_id
 
+@app.route("/get_bookmark_anime", methods=["GET"])
+def get_yoink_bookmark_anime():
+    return jsonify(bookmark_mal_id)
+@app.route("/get_fav_anime", methods=["GET"])
+def get_yoink_anime():
+    return jsonify(favourite_mal_id)
+@app.route("/get_bookmark_manga", methods=["GET"])
+def get_yoink_bookmark_manga():
+    return jsonify(bookmark_manga_mal_id)
+@app.route("/get_fav_manga", methods=["GET"])
+def get_yoink_manga():
+    return jsonify(favourite_manga_mal_id)
 
-def preProcess(s):
-    ps = PorterStemmer()
-    s = word_tokenize(s)
-    stopwords_set = set(stopwords.words())
-    s = [w for w in s if w not in stopwords_set]
-    # s = [w for w in s if not w.isdigit()]
-    s = [ps.stem(w) for w in s]
-    s = ' '.join(s)
-    return s
-
-
-def sk_vectorize():
-    print("bag of words processing...")
-    cleaned_description = main.get_and_clean_data()
-    vectorizer = CountVectorizer(preprocessor=preProcess)
-    vectorizer.fit(cleaned_description)
-    vectorizer = CountVectorizer(preprocessor=preProcess, ngram_range=(1, 2))
-    X = vectorizer.fit_transform(cleaned_description)
 
 
 if __name__ == '__main__':

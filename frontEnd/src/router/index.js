@@ -1,11 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
 import EventListView from "../views/EventListView.vue";
-import AboutView from "../views/AboutView.vue";
+import RegisterView from "../views/RegisterView.vue";
 import SearchView from "@/views/searchView.vue";
 import EventDetailView from "@/views/EventDetailView.vue";
 import EventLayoutView from "@/views/EventLayout.vue";
 import EventDetailViewManga from "@/views/EventDetailViewManga.vue";
 import EventLayoutManga from "@/views/EventLayoutManga.vue";
+import Bookmark from "@/views/bookmark.vue";
+import yourFavView from "@/views/YourFavView.vue";
 
 const routes = [
   {
@@ -18,14 +20,24 @@ const routes = [
     }),
   },
   {
-    path: "/about",
-    name: "about",
-    component: AboutView,
+    path: "/RegisterView",
+    name: "RegisterView",
+    component: RegisterView,
   },
   {
     path: "/search",
     name: "search",
     component: SearchView,
+  },
+  {
+    path: "/bookmark",
+    name: "bookMarkView",
+    component: Bookmark,
+  },
+  {
+    path: "/yourFav",
+    name: "yourFavView",
+    component: yourFavView,
   },
   {
     path: "/EventDetailView/:mal_id",

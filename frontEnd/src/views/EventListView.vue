@@ -1,5 +1,4 @@
 <template>
-  <h1>Events For Good</h1>
   <div>Top Anime</div>
   <div class="scrollmenu">
     <a>
@@ -116,28 +115,6 @@ export default {
           });
       }
     },
-  },
-  hasNextPage() {
-    //first calculate total pages
-    let totalPages = Math.ceil(this.totalEvents / 2); // 2 is events per pages
-
-    //then check to see if the current page is less than a total pages
-    return this.page < totalPages;
-  },
-  prevPage() {
-    // First, calcalate total pages
-
-    // Then check to see if the current page is less than the total pages.
-    return this.page >= 2;
-  },
-  addPage() {
-    return this.perPage < this.totalEvents;
-  },
-  Check() {
-    // First, calcalate total pages
-
-    // Then check to see if the current page is less than the total pages.
-    return this.perPage >= 2;
   },
   created() {
     this.doGet_All();

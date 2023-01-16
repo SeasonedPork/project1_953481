@@ -6,4 +6,5 @@ export default createStore({
   mutations: {},
   actions: {},
   modules: {},
+  mal_id: 0,
 });
