@@ -55,7 +55,7 @@ export default {
       if (this.S_input === "") {
         alert("please add some input");
       } else {
-        const path = "https://api.jikan.moe/v4/anime/" + this.S_input + "/full";
+        const path = "https://api.jikan.moe/v4/anime?q=" + this.S_input;
         axios
           .get(path)
           .then((res) => {
@@ -72,8 +72,7 @@ export default {
       if (this.S_input_manga === "") {
         alert("please add some input");
       } else {
-        const path =
-          "https://api.jikan.moe/v4/manga/" + this.S_input_manga + "/full";
+        const path = "https://api.jikan.moe/v4/manga?q=" + this.S_input_manga;
         axios
           .get(path)
           .then((res) => {
