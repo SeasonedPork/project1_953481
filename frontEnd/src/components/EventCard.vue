@@ -1,13 +1,10 @@
 <template>
-  <b-card>
-    <router-link
-      :to="{ name: 'EventDetailView', params: { mal_id: anime.mal_id } }"
-      style="text-align: center"
-    >
-      <h2 style="font-size: 14px">{{ anime.title }}</h2>
-      <img class="img" :src="anime.images.jpg.image_url" alt="anime cover" />
-    </router-link>
-  </b-card>
+  <router-link
+    :to="{ name: 'EventDetailView', params: { mal_id: anime.mal_id } }"
+  >
+    <img class="img" :src="anime.images.jpg.image_url" alt="anime cover" />
+    <h2 style="font-size: 12px">{{ anime.title }}</h2>
+  </router-link>
 </template>
 <script>
 export default {
@@ -20,13 +17,9 @@ export default {
   },
 };
 </script>
-<style scoped>
+<style>
 .img:hover {
   transform: scale(1.1);
   box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.2);
-}
-.event-link {
-  color: #2c3e50;
-  text-decoration: none;
 }
 </style>

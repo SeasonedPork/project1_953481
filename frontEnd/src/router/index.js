@@ -4,6 +4,8 @@ import AboutView from "../views/AboutView.vue";
 import SearchView from "@/views/searchView.vue";
 import EventDetailView from "@/views/EventDetailView.vue";
 import EventLayoutView from "@/views/EventLayout.vue";
+import EventDetailViewManga from "@/views/EventDetailViewManga.vue";
+import EventLayoutManga from "@/views/EventLayoutManga.vue";
 
 const routes = [
   {
@@ -39,11 +41,19 @@ const routes = [
       },
     ],
   },
-  // {
-  //   path: "/EventDetailView",
-  //   name: "EventDetailView",
-  //   component: EventDetailView,
-  // },
+  {
+    path: "/EventDetailViewManga/:mal_id",
+    name: "EventDetailViewManga",
+    component: EventDetailViewManga,
+    children: [
+      {
+        path: "",
+        name: "EventLayoutViewManga",
+        component: EventLayoutManga,
+        props: true,
+      },
+    ],
+  },
 ];
 
 const router = createRouter({

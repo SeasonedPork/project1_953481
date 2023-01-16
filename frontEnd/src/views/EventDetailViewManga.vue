@@ -1,8 +1,9 @@
 <template>
   <div>
+    <div>text</div>
     <button @click="yoink_id">click here for book mark this!</button>
-    <div v-if="anime">
-      <router-view :anime="anime"></router-view>
+    <div v-if="manga">
+      <router-view :manga="manga"></router-view>
     </div>
   </div>
 </template>
@@ -15,12 +16,12 @@ export default {
   props: ["mal_id"],
   data() {
     return {
-      anime: [],
+      manga: [],
     };
   },
   methods: {
     yoink_id() {
-      const path = "http://127.0.0.1:5000/yoink_id";
+      const path = "http://127.0.0.1:5000/yoink_manga_id";
       axios
         .get(path, { params: { mal_id: this.mal_id } })
         .then((res) => {
@@ -34,9 +35,11 @@ export default {
     },
   },
   created() {
-    EventService.getEvent(this.mal_id)
+    console.log(this.mal_id);
+    EventService.getEvent_manga(this.mal_id)
       .then((response) => {
-        this.anime = response.data;
+        this.manga = response.data;
+        console.log("detail work");
       })
       .catch((error) => {
         console.log(error);

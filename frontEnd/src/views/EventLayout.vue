@@ -2,11 +2,13 @@
   <div>
     <div>
       <div v-if="anime">
-        <img :src="anime.data.images.jpg.large_image_url" alt="anime cover" />
-        <h2>Title {{ anime.data.title }}</h2>
-        <div>ID : {{ anime.data.mal_id }}</div>
-        <div>Story: {{ anime.data.synopsis }}</div>
-        <div>Total Episodes: {{ anime.data.episodes }}</div>
+        <img :src="anime.data.images.jpg.large_image_url" />
+        <h2 style="font-size: 16px">Title {{ anime.data.title }}</h2>
+        <h2 style="font-size: 12px">ID : {{ anime.data.mal_id }}</h2>
+        <h2 style="font-size: 11px">Story: {{ anime.data.synopsis }}</h2>
+        <h2 style="font-size: 14px">
+          Total Episodes: {{ anime.data.episodes }}
+        </h2>
       </div>
     </div>
   </div>

@@ -1,19 +1,27 @@
 <template>
   <h1>Events For Good</h1>
-  <div>{{ count }}</div>
-  <div>
-    Top anime
-    <div>
+  <div>Top Anime</div>
+  <div class="scrollmenu">
+    <a>
       <event-card
         v-for="anime in Anime_data.data"
         :key="anime.mal_id"
         :anime="anime"
-        style="display: inline grid; grid-template-columns: repeat(5, 1fr)"
       >
       </event-card>
-    </div>
+    </a>
   </div>
   <div>Top manga</div>
+  <div class="scrollmenu">
+    <a>
+      <event-card-manga
+        v-for="manga in manga_data.data"
+        :key="manga.mal_id"
+        :manga="manga"
+      >
+      </event-card-manga>
+    </a>
+  </div>
   <div>Your favourite</div>
   <div>Recommendation</div>
 </template>
@@ -22,6 +30,7 @@
 // @ is an alias to /src
 import axios from "axios";
 import EventCard from "@/components/EventCard.vue";
+import EventCardManga from "@/components/EventCardManga.vue";
 
 export default {
   name: "EventListView",
@@ -35,11 +44,13 @@ export default {
       required: true,
     },
   },
-  components: { EventCard },
+  components: { EventCardManga, EventCard },
   data() {
     return {
       Anime_data: [],
       Anime_top_data: [],
+      manga_data: [],
+      manga_top_data: [],
       title: "",
       count: 0,
     };
@@ -57,6 +68,36 @@ export default {
           console.error(error);
         });
     },
+    get_top_M() {
+      const path = "http://127.0.0.1:5000/topManga";
+      axios
+        .get(path)
+        .then((res) => {
+          console.log("top work");
+          this.manga_top_data = res.data;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    doGet_All_M() {
+      if (this.S_input === "") {
+        this.emptyFields = true;
+        alert("NO EMPTY NO NO!!");
+      } else {
+        const path = "http://127.0.0.1:5000/get_All_manga";
+        axios
+          .get(path)
+          .then((response) => {
+            this.manga_data = response.data;
+            console.log("GetALL is kinda work");
+            return response;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    },
     doGet_All() {
       if (this.S_input === "") {
         this.emptyFields = true;
@@ -67,7 +108,6 @@ export default {
           .get(path)
           .then((response) => {
             this.Anime_data = response.data;
-            this.count = Object.keys(response.data).length;
             console.log("GetALL is kinda work");
             return response;
           })
@@ -101,6 +141,7 @@ export default {
   },
   created() {
     this.doGet_All();
+    this.doGet_All_M();
   },
 };
 </script>
@@ -120,10 +161,20 @@ export default {
   text-decoration: none;
   color: #2c3e50;
 }
-#page-prev {
-  text-align: left;
+div.scrollmenu {
+  background-color: #333;
+  overflow: auto;
+  white-space: nowrap;
 }
-#page-next {
-  text-align: right;
+
+div.scrollmenu a {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+}
+div.scrollmenu a:hover {
+  background-color: #777;
 }
 </style>
