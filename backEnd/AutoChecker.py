@@ -1,6 +1,9 @@
-from spellchecker import SpellChecker as spell, SpellChecker
-
-
+from spellchecker import SpellChecker
+#literally from this site but i can't use it's API
+#it's keep using an INDIAN VERSION WHY?
+#https://pyspellchecker.readthedocs.io/en/latest/index.html
+#for in formation gonna use basic first
+spell = SpellChecker()
 # Get all the text from a list that contains nested lists
 def get_text(lst):
     text = []
