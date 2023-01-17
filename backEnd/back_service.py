@@ -177,7 +177,7 @@ def delete_anime_fav():
             favourite_mal_id.remove(convert_int)
     return favourite_mal_id
 @app.route("/delete_anime_bookmark", methods=["GET"])
-def delete_anime_fav():
+def delete_anime_fav_bookmark():
     search_term = request.args.get('mal_id')
     convert_int = int(search_term)
     for i in bookmark_mal_id:
